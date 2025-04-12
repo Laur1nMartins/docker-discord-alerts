@@ -43,11 +43,13 @@ def monitor_docker_events(config):
                 title = event_config['title'].format(name=container_name)
                 description = event_config['description'].format(name=container_name)
                 color = event_config['color']
+                image = event['Actor']['Attributes'].get('image', 'N/A')
 
                 # Prepare fields for the embed
                 fields = [
                     {"name": "Event Type", "value": action, "inline": True},
-                    {"name": "Timestamp", "value": f"<t:{int(time.time())}>", "inline": True}
+                    {"name": "Timestamp", "value": f"<t:{int(time.time())}>", "inline": True},
+                    {"name": "Image", "value": image, "inline": True}
                 ]
 
                 # Include shutdown reason if the event is 'die'
